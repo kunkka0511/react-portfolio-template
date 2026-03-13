@@ -1,195 +1,97 @@
 import { Popover } from "@headlessui/react";
-import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import Button from "../Button";
-// Local Data
+import React from "react";
 import data from "../../data/portfolio.json";
 
 const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { name, showBlog, showResume, socials } = data;
 
-  const { name, showBlog, showResume } = data;
+  const emailLink =
+    socials?.find((item) => item.title === "Email")?.link ||
+    "mailto:youremail@example.com";
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const navItems = !isBlog
+    ? [
+        { label: "Work", action: handleWorkScroll },
+        { label: "About", action: handleAboutScroll },
+        ...(showBlog ? [{ label: "Blog", action: () => router.push("/blog") }] : []),
+        ...(showResume ? [{ label: "Resume", action: () => router.push("/resume") }] : []),
+        { label: "Contact", action: () => window.open(emailLink) },
+      ]
+    : [
+        { label: "Home", action: () => router.push("/") },
+        ...(showBlog ? [{ label: "Blog", action: () => router.push("/blog") }] : []),
+        ...(showResume ? [{ label: "Resume", action: () => router.push("/resume") }] : []),
+        { label: "Contact", action: () => window.open(emailLink) },
+      ];
 
   return (
     <>
       <Popover className="block tablet:hidden mt-5">
-        {({ open }) => (
+        {({ open, close }) => (
           <>
-            <div className="flex items-center justify-between p-2 laptop:p-0">
-              <h1
+            <div className="flex items-center justify-between rounded-2xl border border-black/10 bg-white/70 backdrop-blur-md px-3 py-3 shadow-sm">
+              <button
                 onClick={() => router.push("/")}
-                className="font-medium p-2 laptop:p-0 link"
+                className="text-left font-semibold tracking-tight text-base"
               >
-                {name}.
-              </h1>
+                {name}
+                <span className="opacity-50">.</span>
+              </button>
 
-              <div className="flex items-center">
-                {data.darkMode && (
-                  <Button
-                    onClick={() =>
-                      setTheme(theme === "dark" ? "light" : "dark")
-                    }
-                  >
-                    <img
-                      className="h-6"
-                      src={`/images/${
-                        theme === "dark" ? "moon.svg" : "sun.svg"
-                      }`}
-                    ></img>
-                  </Button>
-                )}
-
-                <Popover.Button>
-                  <img
-                    className="h-5"
-                    src={`/images/${
-                      !open
-                        ? theme === "dark"
-                          ? "menu-white.svg"
-                          : "menu.svg"
-                        : theme === "light"
-                        ? "cancel.svg"
-                        : "cancel-white.svg"
-                    }`}
-                  ></img>
-                </Popover.Button>
-              </div>
+              <Popover.Button
+                className="h-10 w-10 rounded-full border border-black/10 flex items-center justify-center bg-white/70 hover:scale-105 transition"
+                aria-label="Open menu"
+              >
+                <img
+                  className="h-5 w-5"
+                  src={`/images/${!open ? "menu.svg" : "cancel.svg"}`}
+                  alt="menu icon"
+                />
+              </Popover.Button>
             </div>
-            <Popover.Panel
-              className={`absolute right-0 z-10 w-11/12 p-4 ${
-                theme === "dark" ? "bg-slate-800" : "bg-white"
-              } shadow-md rounded-md`}
-            >
-              {!isBlog ? (
-                <div className="grid grid-cols-1">
-                  <Button onClick={handleWorkScroll}>Work</Button>
-                  <Button onClick={handleAboutScroll}>About</Button>
-                  {showBlog && (
-                    <Button onClick={() => router.push("/blog")}>Blog</Button>
-                  )}
-                  {showResume && (
-                    <Button
-                      onClick={() =>
-                        window.open("mailto:hello@chetanverma.com")
-                      }
-                    >
-                      Resume
-                    </Button>
-                  )}
 
-                  <Button
-                    onClick={() => window.open("mailto:hello@chetanverma.com")}
+            <Popover.Panel className="absolute right-0 left-0 mx-2 mt-3 z-20 rounded-2xl border border-black/10 bg-white/90 backdrop-blur-xl shadow-xl p-3">
+              <div className="grid grid-cols-1 gap-2">
+                {navItems.map((item) => (
+                  <button
+                    key={item.label}
+                    onClick={() => {
+                      item.action();
+                      close();
+                    }}
+                    className="w-full text-left px-4 py-3 rounded-xl bg-black/[0.03] hover:bg-black/[0.06] transition font-medium"
                   >
-                    Contact
-                  </Button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1">
-                  <Button onClick={() => router.push("/")} classes="first:ml-1">
-                    Home
-                  </Button>
-                  {showBlog && (
-                    <Button onClick={() => router.push("/blog")}>Blog</Button>
-                  )}
-                  {showResume && (
-                    <Button
-                      onClick={() => router.push("/resume")}
-                      classes="first:ml-1"
-                    >
-                      Resume
-                    </Button>
-                  )}
-
-                  <Button
-                    onClick={() => window.open("mailto:hello@chetanverma.com")}
-                  >
-                    Contact
-                  </Button>
-                </div>
-              )}
+                    {item.label}
+                  </button>
+                ))}
+              </div>
             </Popover.Panel>
           </>
         )}
       </Popover>
-      <div
-        className={`mt-10 hidden flex-row items-center justify-between sticky ${
-          theme === "light" && "bg-white"
-        } dark:text-white top-0 z-10 tablet:flex`}
-      >
-        <h1
+
+      <div className="mt-10 hidden tablet:flex items-center justify-between sticky top-0 z-20 rounded-2xl border border-black/10 px-4 py-3 shadow-sm backdrop-blur-md bg-white/75">
+        <button
           onClick={() => router.push("/")}
-          className="font-medium cursor-pointer mob:p-2 laptop:p-0"
+          className="font-semibold tracking-tight text-lg text-left"
         >
-          {name}.
-        </h1>
-        {!isBlog ? (
-          <div className="flex">
-            <Button onClick={handleWorkScroll}>Work</Button>
-            <Button onClick={handleAboutScroll}>About</Button>
-            {showBlog && (
-              <Button onClick={() => router.push("/blog")}>Blog</Button>
-            )}
-            {showResume && (
-              <Button
-                onClick={() => router.push("/resume")}
-                classes="first:ml-1"
-              >
-                Resume
-              </Button>
-            )}
+          {name}
+          <span className="opacity-50">.</span>
+        </button>
 
-            <Button onClick={() => window.open("mailto:hello@chetanverma.com")}>
-              Contact
-            </Button>
-            {mounted && theme && data.darkMode && (
-              <Button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              >
-                <img
-                  className="h-6"
-                  src={`/images/${theme === "dark" ? "moon.svg" : "sun.svg"}`}
-                ></img>
-              </Button>
-            )}
-          </div>
-        ) : (
-          <div className="flex">
-            <Button onClick={() => router.push("/")}>Home</Button>
-            {showBlog && (
-              <Button onClick={() => router.push("/blog")}>Blog</Button>
-            )}
-            {showResume && (
-              <Button
-                onClick={() => router.push("/resume")}
-                classes="first:ml-1"
-              >
-                Resume
-              </Button>
-            )}
-
-            <Button onClick={() => window.open("mailto:hello@chetanverma.com")}>
-              Contact
-            </Button>
-
-            {mounted && theme && data.darkMode && (
-              <Button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              >
-                <img
-                  className="h-6"
-                  src={`/images/${theme === "dark" ? "moon.svg" : "sun.svg"}`}
-                ></img>
-              </Button>
-            )}
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={item.action}
+              className="px-4 py-2 rounded-full text-sm font-medium bg-black/[0.04] hover:bg-black/[0.08] transition"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );

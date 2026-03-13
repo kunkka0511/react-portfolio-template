@@ -6,6 +6,7 @@ import ProjectResume from "../components/ProjectResume";
 import Socials from "../components/Socials";
 import Button from "../components/Button";
 import { useTheme } from "next-themes";
+
 // Data
 import { name, showResume } from "../data/portfolio.json";
 import { resume } from "../data/portfolio.json";
@@ -21,39 +22,69 @@ const Resume = () => {
     if (!showResume) {
       router.push("/");
     }
-  }, []);
+  }, [router]);
+
   return (
     <>
       {process.env.NODE_ENV === "development" && (
-        <div className="fixed bottom-6 right-6">
-          <Button onClick={() => router.push("/edit")} type={"primary"}>
+        <div className="fixed bottom-6 right-6 z-50">
+          <Button onClick={() => router.push("/edit")} type="primary">
             Edit Resume
           </Button>
         </div>
       )}
+
       {data.showCursor && <Cursor />}
+
       <div
         className={`container mx-auto mb-10 ${
           data.showCursor && "cursor-none"
         }`}
       >
         <Header isBlog />
+
         {mount && (
-          <div className="mt-10 w-full flex flex-col items-center">
+          <div className="mt-10 w-full flex flex-col items-center px-4">
             <div
               className={`w-full ${
-                mount && theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
+                theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
               } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
             >
-              <h1 className="text-3xl font-bold">{name}</h1>
-              <h2 className="text-xl mt-5">{resume.tagline}</h2>
-              <h2 className="w-4/5 text-xl mt-5 opacity-50">
-                {resume.description}
-              </h2>
-              <div className="mt-2">
-                <Socials />
+              {/* Top header */}
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                <div>
+                  <h1 className="text-3xl font-bold">{name}</h1>
+                  <h2 className="text-xl mt-5">{resume.tagline}</h2>
+                  <h2 className="w-full md:w-4/5 text-xl mt-5 opacity-50">
+                    {resume.description}
+                  </h2>
+                  <div className="mt-4">
+                    <Socials />
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    href="/resume/Duvchindorj-Resume.pdf"
+                    download
+                    className="inline-block"
+                  >
+                    <Button type="primary">Download PDF</Button>
+                  </a>
+
+                  <a
+                    href="/resume/Duvchindorj-Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block"
+                  >
+                    <Button>Preview PDF</Button>
+                  </a>
+                </div>
               </div>
-              <div className="mt-5">
+
+              {/* Experience */}
+              <div className="mt-10">
                 <h1 className="text-2xl font-bold">Experience</h1>
 
                 {resume.experiences.map(
@@ -64,11 +95,13 @@ const Resume = () => {
                       type={type}
                       position={position}
                       bullets={bullets}
-                    ></ProjectResume>
+                    />
                   )
                 )}
               </div>
-              <div className="mt-5">
+
+              {/* Education */}
+              <div className="mt-8">
                 <h1 className="text-2xl font-bold">Education</h1>
                 <div className="mt-2">
                   <h2 className="text-lg">{resume.education.universityName}</h2>
@@ -80,12 +113,15 @@ const Resume = () => {
                   </p>
                 </div>
               </div>
-              <div className="mt-5">
+
+              {/* Skills */}
+              <div className="mt-8">
                 <h1 className="text-2xl font-bold">Skills</h1>
-                <div className="flex mob:flex-col desktop:flex-row justify-between">
+
+                <div className="flex mob:flex-col desktop:flex-row justify-between gap-10">
                   {resume.languages && (
                     <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Languages</h2>
+                      <h2 className="text-lg font-medium">Languages</h2>
                       <ul className="list-disc">
                         {resume.languages.map((language, index) => (
                           <li key={index} className="ml-5 py-2">
@@ -98,7 +134,7 @@ const Resume = () => {
 
                   {resume.frameworks && (
                     <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Frameworks</h2>
+                      <h2 className="text-lg font-medium">Frameworks</h2>
                       <ul className="list-disc">
                         {resume.frameworks.map((framework, index) => (
                           <li key={index} className="ml-5 py-2">
@@ -111,7 +147,7 @@ const Resume = () => {
 
                   {resume.others && (
                     <div className="mt-2 mob:mt-5">
-                      <h2 className="text-lg">Others</h2>
+                      <h2 className="text-lg font-medium">Others</h2>
                       <ul className="list-disc">
                         {resume.others.map((other, index) => (
                           <li key={index} className="ml-5 py-2">

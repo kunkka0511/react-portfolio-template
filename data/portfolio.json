@@ -1,1 +1,209 @@
-{"name":"Dorj","headerTaglineOne":"Hello 👋","headerTaglineTwo":"Duvchindorj","headerTaglineThree":"designer and devloper","headerTaglineFour":" Im here in my home lookin work for a live","showCursor":true,"showBlog":true,"darkMode":true,"showResume":true,"socials":[{"id":"1","title":"Github","link":"https://github.com/chetanverma16"},{"id":"2","title":"LinkedIn","link":"https://www.linkedin.com/in/chetanverma7/"},{"id":"3","title":"Twitter","link":"https://twitter.com/realchetanverma"},{"id":"4","title":"Blog","link":"https://blog.chetanverma.com/"},{"id":"5","title":"Email","link":"mailto:hello@chetanverma.com"}],"projects":[{"id":"1","title":"Project One Test","description":"Web Design","imageSrc":"https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60","url":"http://chetanverma.com/"},{"id":"2","title":"Project Two","description":"Web Development","imageSrc":"https://images.unsplash.com/photo-1605153864431-a2795a1b2f95?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwyNTY3ODl8fGVufDB8fHw%3D&auto=format&fit=crop&w=400&q=60","url":"http://chetanverma.com/"},{"id":"3","title":"Project Three","description":"Design","imageSrc":"https://images.unsplash.com/photo-1504083898675-c896ecdae86e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60","url":"http://chetanverma.com/"},{"id":"4","title":"Project Four","description":"Marketing","imageSrc":"https://images.unsplash.com/photo-1492171983775-a51717616c0d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjB8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60","url":"http://chetanverma.com/"},{"id":"5","title":"Project Five","description":"Development","imageSrc":"https://images.unsplash.com/photo-1534239143101-1b1c627395c5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NzZ8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60","url":"http://chetanverma.com/"},{"id":"6","title":"Project Six","description":"Design & Development","imageSrc":"https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTAyfHxwYXN0ZWx8ZW58MHx8MHw%3D&auto=format&fit=crop&w=400&q=60","url":"http://chetanverma.com/"}],"services":[{"id":"1","title":"Art Direction","description":"We help with the creation and development of online advertising ideas, with particular focus on their visual appearance."},{"id":"2","title":"Branding","description":"We design key brand elements such as the logo, color scheme, typography, and other design components that makes your brand stand out from competitors."},{"id":"3","title":"Web Design","description":"We build and optimize your online presence.  Website is the digital entry point into your business and a powerful revenue channel."},{"id":"4","title":"3D Design","description":"We combine creative design and technical skills to build striking 3D visualisations that bring your project to life."}],"aboutpara":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.","resume":{"tagline":"👋  I'm a software engineer, product designer.","description":"I have delivered world-class user experiences to millions of people. Well-versed with React, Javascript, and most of the Web frameworks.","experiences":[{"id":"1","dates":"March 2022 - Present","type":"Full Time","position":"Frontend Engineer at X","bullets":"Bullet One, Bullet Two"},{"id":"d495c23b-4f65-479a-9b8a-cfbc1c089725","dates":"July 2020 - March 2022","type":"Full Time","position":"Frontend Engineer at X","bullets":"Worked on the frontend of a React application, Worked on the frontend of a React application"}],"education":{"universityName":"University X","universityDate":"2016-2020","universityPara":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"},"languages":["Javascript","HTML5","CSS","Python","Go"],"frameworks":["React","Typescript","NodeJs"],"others":["Figma","AdobeXD","AWS"]}}
+{
+  "name": "Duvchindorj",
+  "headerTaglineOne": "Hello 👋",
+  "headerTaglineTwo": "I'm Duvchindorj",
+  "headerTaglineThree": "Software Engineer",
+  "headerTaglineFour": "I build modern web and mobile applications",
+  "showCursor": false,
+  "showBlog": true,
+  "darkMode": false,
+  "showResume": true,
+  "socials": [
+    {
+      "id": "1",
+      "title": "GitHub",
+      "link": "https://github.com/kunkka0511"
+    },
+    {
+      "id": "2",
+      "title": "LinkedIn",
+      "link": "https://linkedin.com/in/yourusername"
+    },
+    {
+      "id": "3",
+      "title": "Email",
+      "link": "https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Flutter Mobile Application",
+      "github": "https://github.com/duvchko0511/real-diplom",
+      "slug": "flutter-mobile-app",
+      "description": "Atomic Habits номоос санаа авч бүтээсэн дадал хөгжүүлэх мобайл аппликейшн. Хэрэглэгч өдөр тутмын жижиг дадлуудаа бүртгэж, хянаж, тогтмол хэрэгжүүлэхэд туслах зорилготой.",
+      "imageSrc": "/images/project1.jpg",
+      "url": "https://your-project-link.com",
+      "overview": "Орчин үеийн нийгэмд хүмүүс гар утсыг их ашигладаг болсон тул энэ боломжийг ашиглан эерэг дадал бий болгоход туслах аппликейшн хийхийг зорьсон. Flutter ашигласнаар нэг кодоор Android болон iOS платформ дээр ажиллах боломжтой болсон.",
+      "tools": [
+        "Flutter",
+        "Dart",
+        "Firebase"
+      ],
+      "gallery": [
+        "/images/project1-detail-2.png"
+      ],
+      "video": "/images/project-flutter.mp4",
+      "challenge": "Аппликейшний өгөгдлийг хадгалах, хэрэглэгчийн дадлыг тогтвортой хянах бүтэц зохион байгуулах нь эхэндээ сорилт байсан. Мөн Firebase ашиглан өгөгдөлтэй ажиллах болон хэрэглэгчийн интерфэйсийг ойлгомжтой байлгах тал дээр анхаарах шаардлагатай байсан.",
+      "solution": "",
+      "result": "Эцэст нь хэрэглэгчийн дадлыг бүртгэх, хянах боломжтой ажиллах систем бүхий мобайл аппликейшн бүтээж чадсан. Энэ төслийн явцад Flutter framework болон Firebase ашиглах практик туршлага олж авсан.",
+      "duration": "3months",
+      "role": "Эцэст нь хэрэглэгчийн дадлыг бүртгэх, хянах боломжтой ажиллах систем бүхий мобайл аппликейшн бүтээж чадсан. Энэ төслийн явцад Flutter framework болон Firebase ашиглах практик туршлага олж авсан",
+      "learned": "\"Flutter ашиглан мобайл аппликейшн хөгжүүлсэн\",\nUI интерфэйс болон хэрэглэгчийн урсгалыг боловсруулсан\nFirebase ашиглан өгөгдөл хадгалах хэсгийг хэрэгжүүлсэн\nAndroid төхөөрөмжийн функцүүдтэй холбогдох хэсгийг Kotlin ашиглан шийдсэн"
+    },
+    {
+      "id": "2",
+      "title": "Mongolian map data",
+      "github": "https://github.com/duvchko0511/myweb",
+      "slug": "portfolio-website",
+      "description": "Python Django framework ашиглан хөгжүүлсэн fullstack веб төсөл. Монгол улсын аж ахуйн нэгж, байршлын мэдээллийг бүртгэх болон хайх боломжтой систем бүтээх зорилготой.",
+      "imageSrc": "/images/project2.jpeg",
+      "url": "https://your-project-link.com",
+      "overview": "Энэ төслийн зорилго нь Монгол улсын бизнес, байгууллагуудын байршлыг веб системээр дамжуулан харах, хайх, бүртгэх боломжийг бий болгох байв. Мөн аялал жуулчлал болон үйлчилгээний салбарт хэрэгцээтэй мэдээллийг нэг дор төвлөрүүлэх санаатай хийгдсэн.",
+      "tools": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "gallery": [
+        "/images/project2.jpeg",
+        "/images/project2-detail-1.jpeg",
+        "/images/project2-detail-2.jpeg",
+        "/images/project2-detail-3.jpeg",
+        "/images/project2-detail-4.jpeg"
+      ],
+      "video": "",
+      "challenge": "Энэ төслийн зорилго нь Монгол улсын бизнес, байгууллагуудын байршлыг веб системээр дамжуулан харах, хайх, бүртгэх боломжийг бий болгох байв. Мөн аялал жуулчлал болон үйлчилгээний салбарт хэрэгцээтэй мэдээллийг нэг дор төвлөрүүлэх санаатай хийгдсэн.",
+      "solution": "",
+      "result": "Эцэст нь хэрэглэгч байршил хайх, мэдээлэл харах, шинэ мэдээлэл бүртгэх боломжтой веб системийг бүтээж чадсан. Энэ төслийн явцад fullstack хөгжүүлэлтийн талаар практик туршлага олж авсан.",
+      "learned": "Django framework ашиглан fullstack веб хөгжүүлэлт хийх\nBackend ба frontend хооронд өгөгдөл дамжуулах\nӨгөгдлийг зөв бүтэцтэй боловсруулах\n\"Веб системийн архитектур ойлгох\"",
+      "role": "Python Django ашиглан backend хөгжүүлсэн\nFrontend болон backend хооронд өгөгдөл дамжуулах хэсгийг хэрэгжүүлсэн\nCRUD функцуудыг хөгжүүлсэн\n\"Мэдээллийг ойлгомжтой харагдах интерфэйс дээр ажилласан\"",
+      "duration": "2months"
+    },
+    {
+      "id": "3",
+      "title": "Missionary Volunteer",
+      "slug": "missionary-volunteer",
+      "description": "1000 Missionary Movement хөтөлбөрт оролцож олон улсын орчинд ажиллаж, нийгэмд эерэг нөлөө үзүүлэх сайн дурын үйл ажиллагаанд оролцсон туршлага.",
+      "imageSrc": "/images/project3.jpeg",
+      "url": "https://www.1000missionarymovement.com/",
+      "overview": "Энэ хөтөлбөрийн хүрээнд би гадаад орчинд амьдарч, өөр соёл, өөр хэлтэй хүмүүстэй хамтран ажилласан. Мөн олон нийтийн арга хэмжээ болон нийгэмд чиглэсэн үйл ажиллагаанд оролцож хүмүүст туслах боломж олдсон.",
+      "tools": [
+        "\"Community Work\"",
+        "\"Event Organization\"",
+        "\"Communication\"",
+        "\"Team Collaboration\""
+      ],
+      "gallery": [
+        "/images/project3-detail-1.jpeg",
+        "/images/project3-detail-2.jpeg",
+        "/images/project3-detail-3.jpeg",
+        "/images/project3-detail-4.jpeg",
+        "/images/project3-detail-5.jpeg",
+        "/images/project3-detail-6.jpeg",
+        "/images/project3-detail-7.jpeg"
+      ],
+      "video": "",
+      "challenge": "Шинэ соёл, шинэ орчинд дасан зохицох нь эхэндээ амар байгаагүй. Хэлний бэрхшээл болон өөр орчинд амьдрах шаардлагатай болсон нь тодорхой сорилтуудыг бий болгосон.",
+      "result": "Энэ туршлага надад хувь хүний болон нийгмийн ур чадваруудыг хөгжүүлэх боломж олгосон. Мөн англи хэлний харилцааны чадвараа сайжруулж, олон улсын орчинд ажиллах туршлага хуримтлуулсан.",
+      "role": "Олон нийтийн арга хэмжээнд оролцсон\nСайн дурын үйл ажиллагаанд оролцож хүмүүст тусалсан\nХүмүүсийг үйл ажиллагаанд уриалж идэвхжүүлсэн\n\"Багийн хамтын ажиллагаанд оролцсон\"",
+      "learned": "Олон улсын орчинд ажиллах чадвар\nХүмүүстэй харилцах болон багийн хамтын ажиллагаа\nОлон нийтийн арга хэмжээ зохион байгуулах\n\"Англи хэлний харилцааны чадвар\"",
+      "duration": "9months"
+    },
+    {
+      "id": "4",
+      "title": "Ugalz Packaging Design",
+      "slug": "ugalz-packaging",
+      "imageSrc": "/images/project4.png",
+      "description": "UGALZ брэндийн бүтээгдэхүүний сав баглаа боодлын дизайн. Брэндийн онцлог, соёлын элементүүдийг харуулсан минималист дизайн хийхийг зорьсон.",
+      "overview": "UGALZ брэндийн бүтээгдэхүүний сав баглаа боодлын дизайн. Брэндийн онцлог, соёлын элементүүдийг харуулсан минималист дизайн хийхийг зорьсон.",
+      "challenge": "Брэндийн онцлогийг алдагдуулахгүйгээр энгийн, ойлгомжтой дизайн гаргах нь гол сорилт байсан. Мөн бүтээгдэхүүн дээр зөв харагдах өнгө, бүтэц сонгох шаардлагатай байсан.",
+      "solution": "I created a cleaner packaging concept using strong typography hierarchy, traditional pattern inspiration, and realistic mockup presentation.",
+      "result": "Эцэст нь бүтээгдэхүүний брэндийн өнгө төрхийг илэрхийлэх боломжтой сав баглаа боодлын дизайн боловсруулж, визуал концепц амжилттай гаргасан.",
+      "tools": [
+        "Illustrator",
+        "Photoshop",
+        "Corel Draw"
+      ],
+      "gallery": [
+        "/images/project04.png",
+        "/images/project4-detail-1.jpeg",
+        "/images/project4-detail-2.jpeg",
+        "/images/project4-detail-3.jpeg"
+      ],
+      "video": "",
+      "role": "Эцэст нь бүтээгдэхүүний брэндийн өнгө төрхийг илэрхийлэх боломжтой сав баглаа боодлын дизайн боловсруулж, визуал концепц амжилттай гаргасан.",
+      "learned": "Сав баглаа боодлын концепц боловсруулсан\nБрэндийн өнгө, хэлбэрийн шийдэл гаргасан\nВизуал дизайн болон mockup бэлтгэсэн"
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "title": "Frontend Development",
+      "description": "I build responsive and user-friendly web interfaces using React, Next.js, and Tailwind CSS."
+    },
+    {
+      "id": "2",
+      "title": "Mobile App Development",
+      "description": "I develop mobile applications using Flutter and Dart with a focus on clean design and practical functionality."
+    },
+    {
+      "id": "3",
+      "title": "UI Design",
+      "description": "I create clear and visually appealing layouts with attention to usability, structure, and consistency."
+    },
+    {
+      "id": "4",
+      "title": "Website Customization",
+      "description": "I customize templates and turn them into professional websites tailored to real needs and goals."
+    }
+  ],
+  "aboutpara": "Hello! I’m Onolt Duvchindorj.\n24 years old\nI am a Software Engineering graduate with a passion for design and technology. My background combines graphic design, frontend development, and an interest in UI/UX design. I enjoy creating clean and meaningful digital experiences that are both visually appealing and functional.\n\nI have experience working as a graphic designer in the food industry, where I worked on packaging design, marketing visuals, and digital content. Through this experience, I developed a strong understanding of visual communication and user-focused design.\n\nIn addition to design, I enjoy building web and mobile interfaces using technologies such as HTML, CSS, Python, Django, and Flutter. I am always curious about new tools and enjoy learning modern design workflows.\n\nRecently, I also participated in an international volunteer program in the Philippines, where I worked with multicultural teams and developed strong communication, teamwork, and leadership skills.\n\nI am currently focusing on improving my UI/UX and frontend development skills, and I am looking for opportunities where I can grow as a designer and developer while contributing meaningful work to a team.",
+  "resume": {
+    "tagline": "👋 I'm a software engineer focused on frontend, mobile, and modern web development.",
+    "description": "I enjoy building clean, useful, and user-friendly digital products.",
+    "experiences": [
+      {
+        "id": "1",
+        "dates": "2024 - Present",
+        "type": "Personal Projects",
+        "position": "Frontend and Portfolio Development",
+        "bullets": "Built portfolio websites using Next.js and Tailwind CSS"
+      },
+      {
+        "id": "2",
+        "dates": "Previous Experience",
+        "type": "Graphic Design",
+        "position": "Graphic Designer",
+        "bullets": "Worked on product design and visual materials"
+      }
+    ],
+    "education": {
+      "universityName": "Bachelor's Degree in Software Engineering",
+      "universityDate": "Completed",
+      "universityPara": "Studied software engineering fundamentals, programming, and software development processes."
+    },
+    "languages": [
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Python",
+      "Dart"
+    ],
+    "frameworks": [
+      "React",
+      "Next.js",
+      "Flutter",
+      "Django",
+      "Tailwind CSS"
+    ],
+    "others": [
+      "Figma",
+      "Adobe Photoshop",
+      "Git",
+      "GitHub"
+    ]
+  }
+}

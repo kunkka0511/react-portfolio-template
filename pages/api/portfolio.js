@@ -2,19 +2,35 @@ import fs from "fs";
 import { join } from "path";
 
 export default function handler(req, res) {
-  const portfolioData = join(process.cwd(), "/data/portfolio.json");
-  if (process.env.NODE_ENV === "development") {
-    if (req.method === "POST") {
+  const portfolioPath = join(process.cwd(), "data", "portfolio.json");
+
+  if (process.env.NODE_ENV !== "development") {
+    return res
+      .status(403)
+      .json({ message: "Editing allowed only in development mode" });
+  }
+
+  if (req.method === "POST") {
+    try {
       fs.writeFileSync(
-        portfolioData,
-        JSON.stringify(req.body),
-        "utf-8",
-        (err) => console.log(err)
+        portfolioPath,
+        JSON.stringify(req.body, null, 2),
+        "utf8"
       );
-    } else {
-      res
-        .status(200)
-        .json({ name: "This route works in development mode only" });
+
+      return res.status(200).json({
+        message: "Portfolio saved successfully",
+      });
+    } catch (error) {
+      console.error(error);
+
+      return res.status(500).json({
+        message: "Failed to save portfolio data",
+      });
     }
   }
+
+  return res.status(200).json({
+    message: "API route working",
+  });
 }

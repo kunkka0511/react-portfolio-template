@@ -9,28 +9,40 @@ import yourData from "../data/portfolio.json";
 import Cursor from "../components/Cursor";
 
 const Edit = () => {
-  // states
   const [data, setData] = useState(yourData);
   const [currentTabs, setCurrentTabs] = useState("HEADER");
   const { theme } = useTheme();
 
-  const saveData = () => {
+  const saveData = async () => {
     if (process.env.NODE_ENV === "development") {
-      fetch("/api/portfolio", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      try {
+        const response = await fetch("/api/portfolio", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to save data");
+        }
+
+        alert("Saved successfully");
+      } catch (error) {
+        console.error(error);
+        alert("Failed to save data");
+      }
     } else {
       alert("This thing only works in development mode.");
     }
   };
 
-  // Project Handler
+  // -----------------------------
+  // Project Handlers
+  // -----------------------------
   const editProjects = (projectIndex, editProject) => {
-    let copyProjects = data.projects;
+    const copyProjects = [...data.projects];
     copyProjects[projectIndex] = { ...editProject };
     setData({ ...data, projects: copyProjects });
   };
@@ -43,26 +55,36 @@ const Edit = () => {
         {
           id: uuidv4(),
           title: "New Project",
-          description: "Web Design & Development",
-          imageSrc:
-            "https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTAyfHxwYXN0ZWx8ZW58MHx8MHw%3D&auto=format&fit=crop&w=400&q=60",
-
-          url: "http://chetanverma.com/",
+          slug: "new-project",
+          description: "Project short description",
+          imageSrc: "/images/project-new.jpg",
+          url: "",
+          github: "",
+          overview: "",
+          challenge: "",
+          solution: "",
+          result: "",
+          role: "",
+          learned: "",
+          duration: "",
+          tools: [],
+          gallery: [],
+          video: "",
         },
       ],
     });
   };
 
   const deleteProject = (id) => {
-    const copyProjects = data.projects;
-    copyProjects = copyProjects.filter((project) => project.id !== id);
+    const copyProjects = data.projects.filter((project) => project.id !== id);
     setData({ ...data, projects: copyProjects });
   };
 
-  // Services Handler
-
+  // -----------------------------
+  // Services Handlers
+  // -----------------------------
   const editServices = (serviceIndex, editService) => {
-    let copyServices = data.services;
+    const copyServices = [...data.services];
     copyServices[serviceIndex] = { ...editService };
     setData({ ...data, services: copyServices });
   };
@@ -75,23 +97,22 @@ const Edit = () => {
         {
           id: uuidv4(),
           title: "New Service",
-          description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+          description: "Service description",
         },
       ],
     });
   };
 
   const deleteService = (id) => {
-    const copyServices = data.services;
-    copyServices = copyServices.filter((service) => service.id !== id);
+    const copyServices = data.services.filter((service) => service.id !== id);
     setData({ ...data, services: copyServices });
   };
 
-  // Socials Handler
-
+  // -----------------------------
+  // Socials Handlers
+  // -----------------------------
   const editSocials = (socialIndex, editSocial) => {
-    let copySocials = data.socials;
+    const copySocials = [...data.socials];
     copySocials[socialIndex] = { ...editSocial };
     setData({ ...data, socials: copySocials });
   };
@@ -104,20 +125,20 @@ const Edit = () => {
         {
           id: uuidv4(),
           title: "New Link",
-          link: "www.chetanverma.com",
+          link: "https://example.com",
         },
       ],
     });
   };
 
   const deleteSocials = (id) => {
-    const copySocials = data.socials;
-    copySocials = copySocials.filter((social) => social.id !== id);
+    const copySocials = data.socials.filter((social) => social.id !== id);
     setData({ ...data, socials: copySocials });
   };
 
-  // Resume
-
+  // -----------------------------
+  // Resume Handlers
+  // -----------------------------
   const handleAddExperiences = () => {
     setData({
       ...data,
@@ -130,7 +151,7 @@ const Edit = () => {
             dates: "Enter Dates",
             type: "Full Time",
             position: "Frontend Engineer at X",
-            bullets: ["Worked on the frontend of a React application"],
+            bullets: "Worked on the frontend of a React application",
           },
         ],
       },
@@ -138,7 +159,7 @@ const Edit = () => {
   };
 
   const handleEditExperiences = (index, editExperience) => {
-    let copyExperiences = data.resume.experiences;
+    const copyExperiences = [...data.resume.experiences];
     copyExperiences[index] = { ...editExperience };
     setData({
       ...data,
@@ -146,10 +167,31 @@ const Edit = () => {
     });
   };
 
+  const handleDeleteExperience = (id) => {
+    const copyExperiences = data.resume.experiences.filter(
+      (experience) => experience.id !== id
+    );
+    setData({
+      ...data,
+      resume: { ...data.resume, experiences: copyExperiences },
+    });
+  };
+
+  // -----------------------------
+  // UI helpers
+  // -----------------------------
+  const inputClass =
+    "w-4/5 ml-10 p-2 rounded-md shadow-lg border-2 bg-transparent";
+  const textareaClass =
+    "w-4/5 ml-10 p-2 rounded-md shadow-lg border-2 bg-transparent min-h-[110px]";
+  const smallTextareaClass =
+    "w-4/5 ml-10 p-2 rounded-md shadow-lg border-2 bg-transparent min-h-[80px]";
+
   return (
     <div className={`container mx-auto ${data.showCursor && "cursor-none"}`}>
-      <Header isBlog></Header>
+      <Header isBlog />
       {data.showCursor && <Cursor />}
+
       <div className="mt-10">
         <div className={`${theme === "dark" ? "bg-transparent" : "bg-white"}`}>
           <div className="flex items-center justify-between">
@@ -161,7 +203,7 @@ const Edit = () => {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center flex-wrap gap-2 mt-4">
             <Button
               onClick={() => setCurrentTabs("HEADER")}
               type={currentTabs === "HEADER" && "primary"}
@@ -200,6 +242,7 @@ const Edit = () => {
             </Button>
           </div>
         </div>
+
         {/* HEADER */}
         {currentTabs === "HEADER" && (
           <div className="mt-10">
@@ -208,10 +251,11 @@ const Edit = () => {
               <input
                 value={data.name}
                 onChange={(e) => setData({ ...data, name: e.target.value })}
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                className={inputClass}
                 type="text"
-              ></input>
+              />
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-sx opacity-50">
                 Header Tagline One
@@ -221,10 +265,11 @@ const Edit = () => {
                 onChange={(e) =>
                   setData({ ...data, headerTaglineOne: e.target.value })
                 }
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                className={inputClass}
                 type="text"
-              ></input>
+              />
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">
                 Header Tagline Two
@@ -234,10 +279,11 @@ const Edit = () => {
                 onChange={(e) =>
                   setData({ ...data, headerTaglineTwo: e.target.value })
                 }
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                className={inputClass}
                 type="text"
-              ></input>
+              />
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">
                 Header Tagline Three
@@ -247,10 +293,11 @@ const Edit = () => {
                 onChange={(e) =>
                   setData({ ...data, headerTaglineThree: e.target.value })
                 }
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                className={inputClass}
                 type="text"
-              ></input>
+              />
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">
                 Header Tagline Four
@@ -260,10 +307,11 @@ const Edit = () => {
                 onChange={(e) =>
                   setData({ ...data, headerTaglineFour: e.target.value })
                 }
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                className={inputClass}
                 type="text"
-              ></input>
+              />
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">Blog</label>
               <div className="w-4/5 ml-10 flex items-center">
@@ -283,6 +331,7 @@ const Edit = () => {
                 </Button>
               </div>
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">Dark Mode</label>
               <div className="w-4/5 ml-10 flex items-center">
@@ -302,6 +351,7 @@ const Edit = () => {
                 </Button>
               </div>
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">Show Resume</label>
               <div className="w-4/5 ml-10 flex items-center">
@@ -314,13 +364,15 @@ const Edit = () => {
                 <Button
                   onClick={() => setData({ ...data, showResume: false })}
                   classes={
-                    !data.showResume && "bg-red-500 text-white hover:bg-red-600"
+                    !data.showResume &&
+                    "bg-red-500 text-white hover:bg-red-600"
                   }
                 >
                   No
                 </Button>
               </div>
             </div>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-lg opacity-50">Custom Cursor</label>
               <div className="w-4/5 ml-10 flex items-center">
@@ -333,7 +385,8 @@ const Edit = () => {
                 <Button
                   onClick={() => setData({ ...data, showCursor: false })}
                   classes={
-                    !data.showCursor && "bg-red-500 text-white hover:bg-red-600"
+                    !data.showCursor &&
+                    "bg-red-500 text-white hover:bg-red-600"
                   }
                 >
                   No
@@ -342,6 +395,7 @@ const Edit = () => {
             </div>
           </div>
         )}
+
         {/* PROJECTS */}
         {currentTabs === "PROJECTS" && (
           <>
@@ -361,64 +415,257 @@ const Edit = () => {
                   <div className="flex items-center mt-5">
                     <label className="w-1/5 text-lg opacity-50">Title</label>
                     <input
-                      value={project.title}
+                      value={project.title || ""}
                       onChange={(e) =>
                         editProjects(index, {
                           ...project,
                           title: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
+
                   <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Slug</label>
+                    <input
+                      value={project.slug || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          slug: e.target.value,
+                        })
+                      }
+                      className={inputClass}
+                      type="text"
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
                     <label className="w-1/5 text-lg opacity-50">
                       Description
                     </label>
-                    <input
-                      value={project.description}
+                    <textarea
+                      value={project.description || ""}
                       onChange={(e) =>
                         editProjects(index, {
                           ...project,
                           description: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
-                      type="text"
-                    ></input>
+                      className={smallTextareaClass}
+                    />
                   </div>
+
                   <div className="flex items-center mt-2">
                     <label className="w-1/5 text-lg opacity-50">
                       Image Source
                     </label>
                     <input
-                      value={project.imageSrc}
+                      value={project.imageSrc || ""}
                       onChange={(e) =>
                         editProjects(index, {
                           ...project,
                           imageSrc: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
+
                   <div className="flex items-center mt-2">
-                    <label className="w-1/5 text-lg opacity-50">url</label>
+                    <label className="w-1/5 text-lg opacity-50">Live URL</label>
                     <input
-                      value={project.url}
+                      value={project.url || ""}
                       onChange={(e) =>
                         editProjects(index, {
                           ...project,
                           url: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
-                  <hr className="my-10"></hr>
+
+                  <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">GitHub</label>
+                    <input
+                      value={project.github || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          github: e.target.value,
+                        })
+                      }
+                      className={inputClass}
+                      type="text"
+                    />
+                  </div>
+
+                  <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Duration</label>
+                    <input
+                      value={project.duration || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          duration: e.target.value,
+                        })
+                      }
+                      className={inputClass}
+                      type="text"
+                      placeholder="2 weeks / 1 month"
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Overview</label>
+                    <textarea
+                      value={project.overview || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          overview: e.target.value,
+                        })
+                      }
+                      className={textareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">
+                      Challenge
+                    </label>
+                    <textarea
+                      value={project.challenge || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          challenge: e.target.value,
+                        })
+                      }
+                      className={textareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">
+                      Solution
+                    </label>
+                    <textarea
+                      value={project.solution || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          solution: e.target.value,
+                        })
+                      }
+                      className={textareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Result</label>
+                    <textarea
+                      value={project.result || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          result: e.target.value,
+                        })
+                      }
+                      className={textareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">My Role</label>
+                    <textarea
+                      value={project.role || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          role: e.target.value,
+                        })
+                      }
+                      className={smallTextareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">
+                      What I Learned
+                    </label>
+                    <textarea
+                      value={project.learned || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          learned: e.target.value,
+                        })
+                      }
+                      className={smallTextareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">
+                      Tools (comma)
+                    </label>
+                    <input
+                      value={project.tools?.join(", ") || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          tools: e.target.value
+                            .split(",")
+                            .map((item) => item.trim())
+                            .filter(Boolean),
+                        })
+                      }
+                      className={inputClass}
+                      type="text"
+                    />
+                  </div>
+
+                  <div className="flex items-start mt-2">
+                    <label className="w-1/5 text-lg opacity-50">
+                      Gallery (comma)
+                    </label>
+                    <textarea
+                      value={project.gallery?.join(", ") || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          gallery: e.target.value
+                            .split(",")
+                            .map((item) => item.trim())
+                            .filter(Boolean),
+                        })
+                      }
+                      className={smallTextareaClass}
+                    />
+                  </div>
+
+                  <div className="flex items-center mt-2">
+                    <label className="w-1/5 text-lg opacity-50">Video</label>
+                    <input
+                      value={project.video || ""}
+                      onChange={(e) =>
+                        editProjects(index, {
+                          ...project,
+                          video: e.target.value,
+                        })
+                      }
+                      className={inputClass}
+                      type="text"
+                    />
+                  </div>
+
+                  <hr className="my-10" />
                 </div>
               ))}
             </div>
@@ -430,6 +677,7 @@ const Edit = () => {
             </div>
           </>
         )}
+
         {/* SERVICES */}
         {currentTabs === "SERVICES" && (
           <>
@@ -445,6 +693,7 @@ const Edit = () => {
                       Delete
                     </Button>
                   </div>
+
                   <div className="flex items-center mt-5">
                     <label className="w-1/5 text-lg opacity-50">Title</label>
                     <input
@@ -455,10 +704,11 @@ const Edit = () => {
                           title: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
+
                   <div className="flex items-center mt-5">
                     <label className="w-1/5 text-lg opacity-50">
                       Description
@@ -471,13 +721,15 @@ const Edit = () => {
                           description: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
-                    ></textarea>
+                      className={smallTextareaClass}
+                    />
                   </div>
-                  <hr className="my-10"></hr>
+
+                  <hr className="my-10" />
                 </div>
               ))}
             </div>
+
             <div className="my-10">
               <Button onClick={addService} type="primary">
                 Add Service +
@@ -485,61 +737,66 @@ const Edit = () => {
             </div>
           </>
         )}
+
+        {/* ABOUT */}
         {currentTabs === "ABOUT" && (
           <div className="mt-10">
             <h1 className="text-2xl">About</h1>
             <textarea
-              className="w-full h-96 mt-10 p-2 rounded-md shadow-md border"
+              className="w-full h-96 mt-10 p-2 rounded-md shadow-md border bg-transparent"
               value={data.aboutpara}
               onChange={(e) => setData({ ...data, aboutpara: e.target.value })}
-            ></textarea>
+            />
           </div>
         )}
+
+        {/* SOCIAL */}
         {currentTabs === "SOCIAL" && (
           <div className="mt-10">
             {data.socials.map((social, index) => (
-              <>
-                <div key={social.id}>
-                  <div className="flex items-center justify-between">
-                    <h1 className="text-2xl">{social.title}</h1>
-                    <Button
-                      onClick={() => deleteSocials(social.id)}
-                      type="primary"
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                  <div className="flex items-center mt-5">
-                    <label className="w-1/5 text-lg opacity-50">Title</label>
-                    <input
-                      value={social.title}
-                      onChange={(e) =>
-                        editSocials(index, {
-                          ...social,
-                          title: e.target.value,
-                        })
-                      }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
-                      type="text"
-                    ></input>
-                  </div>
-                  <div className="flex items-center mt-5">
-                    <label className="w-1/5 text-lg opacity-50">Link</label>
-                    <input
-                      value={social.link}
-                      onChange={(e) =>
-                        editSocials(index, {
-                          ...social,
-                          link: e.target.value,
-                        })
-                      }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
-                      type="text"
-                    />
-                  </div>
-                  <hr className="my-10"></hr>
+              <div key={social.id}>
+                <div className="flex items-center justify-between">
+                  <h1 className="text-2xl">{social.title}</h1>
+                  <Button
+                    onClick={() => deleteSocials(social.id)}
+                    type="primary"
+                  >
+                    Delete
+                  </Button>
                 </div>
-              </>
+
+                <div className="flex items-center mt-5">
+                  <label className="w-1/5 text-lg opacity-50">Title</label>
+                  <input
+                    value={social.title}
+                    onChange={(e) =>
+                      editSocials(index, {
+                        ...social,
+                        title: e.target.value,
+                      })
+                    }
+                    className={inputClass}
+                    type="text"
+                  />
+                </div>
+
+                <div className="flex items-center mt-5">
+                  <label className="w-1/5 text-lg opacity-50">Link</label>
+                  <input
+                    value={social.link}
+                    onChange={(e) =>
+                      editSocials(index, {
+                        ...social,
+                        link: e.target.value,
+                      })
+                    }
+                    className={inputClass}
+                    type="text"
+                  />
+                </div>
+
+                <hr className="my-10" />
+              </div>
             ))}
             <div className="my-10">
               <Button onClick={addSocials} type="primary">
@@ -548,9 +805,12 @@ const Edit = () => {
             </div>
           </div>
         )}
+
+        {/* RESUME */}
         {currentTabs === "RESUME" && (
           <div className="mt-10">
             <h1>Main</h1>
+
             <div className="mt-5 flex items-center">
               <label className="w-1/5 text-sx opacity-50">Tagline</label>
               <input
@@ -561,10 +821,11 @@ const Edit = () => {
                     resume: { ...data.resume, tagline: e.target.value },
                   })
                 }
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                className={inputClass}
                 type="text"
-              ></input>
+              />
             </div>
+
             <div className="flex items-center mt-5">
               <label className="w-1/5 text-lg opacity-50">Description</label>
               <textarea
@@ -575,10 +836,11 @@ const Edit = () => {
                     resume: { ...data.resume, description: e.target.value },
                   })
                 }
-                className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
-              ></textarea>
+                className={smallTextareaClass}
+              />
             </div>
-            <hr className="my-10"></hr>
+
+            <hr className="my-10" />
 
             <h1>Experiences</h1>
             <div className="mt-10">
@@ -587,7 +849,7 @@ const Edit = () => {
                   <div className="flex items-center justify-between">
                     <h1 className="text-2xl">{experiences.position}</h1>
                     <Button
-                      // onClick={() => deleteProject(project.id)}
+                      onClick={() => handleDeleteExperience(experiences.id)}
                       type="primary"
                     >
                       Delete
@@ -604,10 +866,11 @@ const Edit = () => {
                           dates: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
+
                   <div className="flex items-center mt-2">
                     <label className="w-1/5 text-lg opacity-50">Type</label>
                     <input
@@ -618,10 +881,11 @@ const Edit = () => {
                           type: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
+
                   <div className="flex items-center mt-2">
                     <label className="w-1/5 text-lg opacity-50">Position</label>
                     <input
@@ -632,10 +896,11 @@ const Edit = () => {
                           position: e.target.value,
                         })
                       }
-                      className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                      className={inputClass}
                       type="text"
-                    ></input>
+                    />
                   </div>
+
                   <div className="mt-2 flex">
                     <label className="w-1/5 text-lg opacity-50">Bullets</label>
                     <div className="w-4/5 ml-10 flex flex-col">
@@ -648,22 +913,28 @@ const Edit = () => {
                           })
                         }
                         placeholder="Bullet One, Bullet Two, Bullet Three"
-                        className="p-2 rounded-md shadow-lg border-2"
+                        className="p-2 rounded-md shadow-lg border-2 bg-transparent"
                         type="text"
-                      ></input>
+                      />
                     </div>
                   </div>
+
+                  <hr className="my-10" />
                 </div>
               ))}
             </div>
+
             <div className="my-10">
               <Button onClick={handleAddExperiences} type="primary">
                 Add Experience +
               </Button>
             </div>
-            <hr className="my-10"></hr>
+
+            <hr className="my-10" />
+
             <div className="mt-10">
               <h1>Education</h1>
+
               <div className="flex items-center mt-5">
                 <label className="w-1/5 text-lg opacity-50">Name</label>
                 <input
@@ -680,10 +951,11 @@ const Edit = () => {
                       },
                     })
                   }
-                  className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                  className={inputClass}
                   type="text"
-                ></input>
+                />
               </div>
+
               <div className="flex items-center mt-5">
                 <label className="w-1/5 text-lg opacity-50">Dates</label>
                 <input
@@ -700,10 +972,11 @@ const Edit = () => {
                       },
                     })
                   }
-                  className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                  className={inputClass}
                   type="text"
-                ></input>
+                />
               </div>
+
               <div className="flex items-center mt-5">
                 <label className="w-1/5 text-lg opacity-50">Detail</label>
                 <input
@@ -720,12 +993,14 @@ const Edit = () => {
                       },
                     })
                   }
-                  className="w-4/5 ml-10 p-2 rounded-md shadow-lg border-2"
+                  className={inputClass}
                   type="text"
-                ></input>
+                />
               </div>
             </div>
-            <hr className="my-10"></hr>
+
+            <hr className="my-10" />
+
             <div className="mt-10">
               <div className="flex">
                 <label className="w-1/5 text-lg opacity-50">Languages</label>
@@ -747,9 +1022,9 @@ const Edit = () => {
                             },
                           });
                         }}
-                        className="w-full p-2 rounded-md shadow-lg border-2"
+                        className="w-full p-2 rounded-md shadow-lg border-2 bg-transparent"
                         type="text"
-                      ></input>
+                      />
                       <Button
                         onClick={() =>
                           setData({
@@ -784,7 +1059,9 @@ const Edit = () => {
                   </Button>
                 </div>
               </div>
-              <hr className="my-10"></hr>
+
+              <hr className="my-10" />
+
               <div className="flex">
                 <label className="w-1/5 text-lg opacity-50">Frameworks</label>
                 <div className="w-4/5 ml-10 flex flex-col">
@@ -805,9 +1082,9 @@ const Edit = () => {
                             },
                           });
                         }}
-                        className="w-full p-2 rounded-md shadow-lg border-2"
+                        className="w-full p-2 rounded-md shadow-lg border-2 bg-transparent"
                         type="text"
-                      ></input>
+                      />
                       <Button
                         onClick={() =>
                           setData({
@@ -842,7 +1119,9 @@ const Edit = () => {
                   </Button>
                 </div>
               </div>
-              <hr className="my-10"></hr>
+
+              <hr className="my-10" />
+
               <div className="flex">
                 <label className="w-1/5 text-lg opacity-50">Others</label>
                 <div className="w-4/5 ml-10 flex flex-col">
@@ -863,9 +1142,9 @@ const Edit = () => {
                             },
                           });
                         }}
-                        className="w-full p-2 rounded-md shadow-lg border-2"
+                        className="w-full p-2 rounded-md shadow-lg border-2 bg-transparent"
                         type="text"
-                      ></input>
+                      />
                       <Button
                         onClick={() =>
                           setData({
